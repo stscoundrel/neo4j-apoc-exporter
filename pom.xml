@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.stscoundrel</groupId>
+    <artifactId>neo4j-apoc-exporter</artifactId>
+    <version>0.1.0</version>
+    <url>https://github.com/stscoundrel/kotlin-template</url>
+
+    <developers>
+        <developer>
+            <id>stscoundrel</id>
+            <name>Sampo Silvennoinen</name>
+            <email>silvennoinen.sampo@gmail.com</email>
+            <url>https://github.com/stscoundrel</url>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/stscoundrel/neo4j-apoc-exporter.git</connection>
+        <developerConnection>scm:git:ssh://github.com:stscoundrel/neo4j-apoc-exporter.git</developerConnection>
+        <url>http://github.com/stscoundrel/neo4j-apoc-exporter/tree/master</url>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>http://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>prometheus-metrics-core</artifactId>
+            <version>1.3.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>prometheus-metrics-instrumentation-jvm</artifactId>
+            <version>1.3.6</version>
+        </dependency>
+        <dependency>
+            <groupId>io.prometheus</groupId>
+            <artifactId>prometheus-metrics-exporter-httpserver</artifactId>
+            <version>1.3.6</version>
+        </dependency>
+    </dependencies>
+
+</project>
