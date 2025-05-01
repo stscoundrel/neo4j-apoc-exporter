@@ -10,15 +10,17 @@ public class App {
 
         JvmMetrics.builder().register();
 
+        Config config = Config.fromEnv();
+
         Neo4jApocMetrics metrics = new Neo4jApocMetrics(
-                "bolt://localhost:7687", // TODO: from ENV
-                "neo4j",// TODO: from ENV
-                "password"// TODO: from ENV
+                config.neo4jUri(),
+                config.neo4jUser(),
+                config.neo4jPassword()
         );
         metrics.registerAllMetrics();
 
         HTTPServer server = HTTPServer.builder()
-                .port(9400) // TODO: from Env
+                .port(config.exporterPort())
                 .buildAndStart();
 
         System.out.println("Live metrics at http://localhost:" + server.getPort() + "/metrics");
