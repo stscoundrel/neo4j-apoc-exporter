@@ -6,6 +6,12 @@ public record Config(
         String neo4jPassword,
         int exporterPort
 ) {
+    public static Config fromArgsOrEnv(String[] args) {
+        return (args.length >= 4)
+                ? new Config(args[0], args[1], args[2], Integer.parseInt(args[3]))
+                : fromEnv();
+    }
+
     public static Config fromEnv() {
         return new Config(
                 getEnvOrDefault("NEO4J_URI", "bolt://localhost:7687"),
