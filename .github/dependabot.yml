@@ -19,3 +19,13 @@ updates:
       ci-dependencies:
         patterns:
           - "*"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 25
+    groups:
+      docker-dependencies:
+        patterns:
+          - "*"
