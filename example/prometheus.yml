@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 1m
+
+scrape_configs:
+  # Monitor self.
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Monitor the server environment.
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Monitor Neo4j
+  - job_name: 'neo4j'
+    scheme: http
+    static_configs:
+      - targets: ['neo4j-exporter:17687']
