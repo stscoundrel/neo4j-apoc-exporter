@@ -14,6 +14,7 @@ public class Neo4jApocMetrics {
 
     public Neo4jApocMetrics(String uri, String username, String password) {
         this.driver = GraphDatabase.driver(uri, AuthTokens.basic(username, password));
+        waitForNeo4jReadiness();
     }
 
     public void registerAllMetrics() {
@@ -75,5 +76,28 @@ public class Neo4jApocMetrics {
 
     public void close() {
         driver.close();
+    }
+
+    private void waitForNeo4jReadiness() {
+        int retries = 24;
+        int delaySeconds = 5;
+
+        for (int i = 1; i <= retries; i++) {
+            try (Session session = driver.session()) {
+                session.run("RETURN 1").consume();
+                System.out.println("Successfully connected to Neo4j.");
+                return;
+            } catch (Exception e) {
+                System.err.println("Waiting for Neo4j... (" + i + "/" + retries + ")");
+                try {
+                    Thread.sleep(delaySeconds * 1000L);
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt();
+                    throw new RuntimeException("Interrupted while waiting for Neo4j", ie);
+                }
+            }
+        }
+
+        throw new RuntimeException("Failed to connect to Neo4j after " + retries + " attempts.");
     }
 }
