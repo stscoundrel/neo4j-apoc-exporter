@@ -8,7 +8,7 @@
 
 ## Installation
 
-The exporter is provided as Docker image (to be published in hub, currently available in this repo). You can also build the Jar yourself from sources and run that, should you have a special use case.
+The exporter is provided as [Docker image](https://hub.docker.com/r/stscoundrel/neo4j-apoc-exporter/tags). You can also build the Jar yourself from sources and run that, should you have a special use case.
 
 The image accepts the following environment variables:
 
@@ -17,7 +17,30 @@ The image accepts the following environment variables:
 - `NEO4J_PASSWORD`
 - `EXPORTER_PORT`
 
-For example on usage with Docker compose, see `example` folder.
+In your Docker Compose:
+
+```
+neo4j-exporter:
+    image: stscoundrel/neo4j-apoc-exporter:v0.1.0
+    ports:
+      - "17687:17687"
+    environment:
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=password
+      - EXPORTER_PORT=17687
+```
+
+In your prometheus.yml:
+
+```
+- job_name: 'neo4j'
+  scheme: http
+  static_configs:
+  - targets: ['neo4j-exporter:17687']
+```
+
+For example on usage with image from repo & Docker compose, see `example` folder.
 
 ## Metrics
 
