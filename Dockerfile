@@ -1,5 +1,5 @@
 # Build stage
-FROM maven:3.9.6-eclipse-temurin-21 AS builder
+FROM maven:3.9-eclipse-temurin-11 AS builder
 
 WORKDIR /app
 
