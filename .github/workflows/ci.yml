@@ -14,13 +14,13 @@ jobs:
           java-version: 21
 
       - name: 'Cache Maven packages'
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}-${{ github.sha }}
 
       - name: 'Checkout'
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: 'Clean and verify'
         run: ./mvnw --no-transfer-progress clean verify
